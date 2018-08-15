@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { 
+  addRecipe,
+  editRecipe,
+  deleteRecipe
+ } from "../store/actions";
 
 import Recipe from './Recipe';
 import Navigation from './Navigation';
@@ -37,7 +44,7 @@ class App extends Component {
           id: 'pizza'
         },
       ],
-      selectedRecipe: null
+      selectedRecipe: ''
     }
   }
 
@@ -71,9 +78,9 @@ class App extends Component {
         {
           recipeToSelect ? 
             <Recipe
-            ingredients={recipeToSelect.ingredients}
-            steps={recipeToSelect.steps}
-            title={recipeToSelect.title}
+            recipe={recipeToSelect}
+            editRecipe={this.props.editRecipe}
+            deleteRecipe={this.props.deleteRecipe}
             />
             :
             null
@@ -91,4 +98,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+  addRecipe: (recipe) => dispatch(addRecipe(recipe)),
+  editRecipe: (recipe) => dispatch(editRecipe(recipe)),
+  deleteRecipe: (recipeId) => dispatch(deleteRecipe(recipeId))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

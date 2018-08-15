@@ -20,10 +20,9 @@ class Navigation extends Component {
           <ul className="Navigation__list">
             {
               this.props.recipes.map((recipe) => 
-                <li>
+                <li key={recipe.id}>
                   <button 
                     id={recipe.id + '_button'} 
-                    key={recipe.id}
                     onClick={this.changeRecipe}
                     className={
                       recipe.id  === this.props.activeRecipe  ? 
